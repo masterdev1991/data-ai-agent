@@ -1,0 +1,9 @@
+# 1. Extract and load data
+User: extract electric_cars.csv
+User: load to postgres electric_cars
+
+# 2. Generate dbt sources for the loaded table
+User: generate dbt sources for electric_cars
+
+# 3. Generate with custom schema
+User: generate dbt sources for electric_cars in schema raw
