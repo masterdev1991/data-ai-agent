@@ -1,5 +1,5 @@
 [flake8]
-max-line-length=250
+max-line-length=260
 
 # List of Error codes to ignore
 # W503: Line break before binary operator
