@@ -92,7 +92,7 @@ def process_user_message(user_input: str, agent_state: AgentState):
         progress_bar = st.progress(0, "Processing...")
 
         # Debug: Show what message is being sent to agent
-        with st.expander("🔍 Debug: Message sent to agent", expanded=False):
+        with st.expander("Debug: Message sent to agent", expanded=False):
             st.code(f"User Input: {user_input}")
 
         step = 0
@@ -101,7 +101,7 @@ def process_user_message(user_input: str, agent_state: AgentState):
             step += 1
 
             # Debug: Show agent processing steps
-            with st.expander("🔍 Debug: Agent processing steps", expanded=False):
+            with st.expander("Debug: Agent processing steps", expanded=False):
                 st.write(f"Step {step}:", output)
 
             for _, value in output.items():
@@ -163,7 +163,7 @@ def display_dataframe_info(df):
 
 
 # ========== UI ==========
-st.title("🔄 ETL Assistant")
+st.title("ETL Assistant")
 st.markdown(
     "Upload CSV files, process data, and generate dbt sources with AI assistance!"
 )
@@ -190,8 +190,8 @@ with st.sidebar:
             }
 
             st.success(f"✅ File uploaded: {uploaded_file.name}")
-            st.info(f"📍 Saved to: {file_path}")
-            st.info(f"📏 Size: {uploaded_file.size / 1024:.1f} KB")
+            st.info(f"Saved to: {file_path}")
+            st.info(f"Size: {uploaded_file.size / 1024:.1f} KB")
 
             # Quick actions
             st.header("⚡ Quick Actions")
@@ -225,7 +225,7 @@ with st.sidebar:
                         st.rerun()
 
             with col2:
-                if st.button("👀 Preview", use_container_width=True):
+                if st.button("Preview", use_container_width=True):
                     with st.spinner("Loading preview..."):
                         response = process_user_message(
                             "preview data", st.session_state.agent_state
@@ -285,7 +285,7 @@ with st.sidebar:
             try:
                 # Test reading the CSV directly with pandas
                 test_df = pd.read_csv(file_path)
-                st.success(f"✅ Direct CSV read successful!")
+                st.success(f"Direct CSV read successful!")
                 st.write(f"Shape: {test_df.shape}")
                 st.dataframe(test_df.head(3))
 
@@ -294,10 +294,10 @@ with st.sidebar:
                 st.session_state.agent_state.history.append(
                     f"Direct loaded: {st.session_state.uploaded_file_info['name']}"
                 )
-                st.success("✅ Manually set dataframe in agent state")
+                st.success("Manually set dataframe in agent state")
 
             except Exception as e:
-                st.error(f"❌ Direct CSV read failed: {e}")
+                st.error(f"Direct CSV read failed: {e}")
 
 # Main content area
 col1, col2 = st.columns([2, 1])
@@ -367,7 +367,7 @@ with col2:
 
 # Data preview section
 if st.session_state.agent_state.current_df is not None:
-    st.header("📊 Current Dataset Overview")
+    st.header("Current Dataset Overview")
 
     df = st.session_state.agent_state.current_df
 
@@ -386,7 +386,7 @@ if st.session_state.agent_state.current_df is not None:
         show_dtypes = st.checkbox("Show data types", value=False)
 
     with col3:
-        if st.button("🔄 Refresh Preview", use_container_width=True):
+        if st.button("Refresh Preview", use_container_width=True):
             st.rerun()
 
     # Data preview
@@ -421,16 +421,16 @@ if st.session_state.agent_state.current_df is not None:
 
 # Clear chat history button
 if st.session_state.chat_history:
-    if st.button("🗑️ Clear Chat History"):
+    if st.button("Clear Chat History"):
         st.session_state.chat_history = []
         st.rerun()
 
 # Footer
 st.markdown("---")
-st.markdown("**ETL Assistant** | Built with ❤️ using Streamlit and LangGraph")
+st.markdown("**ETL Assistant**")
 
 # Debug information (only show in development)
-if st.checkbox("🐛 Show Debug Info"):
+if st.checkbox("Show Debug Info"):
     st.subheader("Debug Information")
     st.write("**Uploaded File Info:**", st.session_state.uploaded_file_info)
     if st.session_state.uploaded_file_info:
