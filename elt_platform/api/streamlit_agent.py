@@ -243,7 +243,7 @@ with st.sidebar:
         st.metric("Rows", f"{len(df):,}")
         st.metric("Columns", len(df.columns))
 
-        if st.button("ℹ️ Detailed Info", use_container_width=True):
+        if st.button("Detailed Info", use_container_width=True):
             response = process_user_message(
                 "get data info", st.session_state.agent_state
             )
@@ -253,9 +253,9 @@ with st.sidebar:
             st.rerun()
 
         # Additional quick actions for loaded data
-        st.subheader("🔧 Data Operations")
+        st.subheader("Data Operations")
 
-        if st.button("🔍 Filter Data", use_container_width=True):
+        if st.button("Filter Data", use_container_width=True):
             st.session_state.show_filter_form = True
 
         # Table name input for loading to postgres
@@ -285,7 +285,7 @@ with st.sidebar:
             try:
                 # Test reading the CSV directly with pandas
                 test_df = pd.read_csv(file_path)
-                st.success(f"Direct CSV read successful!")
+                st.success("Direct CSV read successful!")
                 st.write(f"Shape: {test_df.shape}")
                 st.dataframe(test_df.head(3))
 
