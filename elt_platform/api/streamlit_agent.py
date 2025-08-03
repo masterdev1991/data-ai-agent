@@ -66,7 +66,7 @@ def save_uploaded_file(uploaded_file):
         if file_path.exists() and file_path.stat().st_size > 0:
             # Test if it's a valid CSV
             try:
-                test_df = pd.read_csv(file_path, nrows=1)
+                # test_df = pd.read_csv(file_path, nrows=1)
                 return str(file_path.absolute())
             except Exception as e:
                 st.error(f"Invalid CSV file: {e}")
@@ -304,7 +304,7 @@ col1, col2 = st.columns([2, 1])
 
 with col1:
     # Chat interface
-    st.header("💬 Chat with ETL Assistant")
+    st.header("Chat with ETL Assistant")
 
     # Display chat history
     chat_container = st.container()
