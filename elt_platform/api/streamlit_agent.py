@@ -52,7 +52,9 @@ def get_agent_graph():
 
 
 def save_uploaded_file(uploaded_file):
-    """Save uploaded file and return the file path"""
+    """
+    Save uploaded file and return the file path
+    """
     try:
         # Create a safe filename
         safe_filename = uploaded_file.name.replace(" ", "_")
@@ -81,7 +83,9 @@ def save_uploaded_file(uploaded_file):
 
 
 def process_user_message(user_input: str, agent_state: AgentState):
-    """Process user message through the agent"""
+    """
+    Process user message through the agent
+    """
     app = get_agent_graph()
 
     # Clear previous conversation except system message
@@ -147,7 +151,9 @@ def process_user_message(user_input: str, agent_state: AgentState):
 
 
 def display_dataframe_info(df):
-    """Display comprehensive dataframe information"""
+    """
+    Display comprehensive dataframe information
+    """
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
@@ -189,7 +195,7 @@ with st.sidebar:
                 "size": uploaded_file.size,
             }
 
-            st.success(f"✅ File uploaded: {uploaded_file.name}")
+            st.success(f"File uploaded: {uploaded_file.name}")
             st.info(f"Saved to: {file_path}")
             st.info(f"Size: {uploaded_file.size / 1024:.1f} KB")
 
@@ -321,11 +327,15 @@ with col1:
         processed_input = user_input
 
         # If user mentions "uploaded file" and we have a file, use the actual path
+        # response = process_user_message(
+        #     f'extract_csv_tool("{exact_path}")',
+        #     st.session_state.agent_state,
+        # )
         if (
             "uploaded file" in user_input.lower() or "upload" in user_input.lower()
         ) and st.session_state.uploaded_file_info:
             file_path = st.session_state.uploaded_file_info["path"].replace("\\", "/")
-            processed_input = f"extract csv from {file_path}"
+            processed_input = f'extract_csv_tool("{file_path}")'
 
         # Add user message
         st.session_state.chat_history.append(("User", user_input))
